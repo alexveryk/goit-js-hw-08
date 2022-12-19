@@ -1,6 +1,6 @@
 // Add imports above this line
 import { galleryItems } from './gallery-items';
-// import SimpleLightbox from 'simplelightbox';
+import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 // Change code below this line
 
@@ -24,3 +24,8 @@ const lightbox = new SimpleLightbox('.gallery a', {
   captionsData: 'alt',
   captionDelay: 250,
 });
+
+// const lightbox = $('.gallery a').simpleLightbox({
+//   captionsData: 'alt',
+//   captionDelay: 250,
+// });
