@@ -1,32 +1,32 @@
 import throttle from 'lodash.throttle';
 
+const form = {};
+const FEDBACK_FORM = 'feedback-form-state';
+
 const feedbackForm = document.querySelector('.feedback-form');
 feedbackForm.addEventListener('input', throttle(inputType, 500));
 feedbackForm.addEventListener('submit', onSubmit);
-
-const form = {};
-const FEDBACK_FORM = 'feedback-form-state';
 
 function inputType(event) {
   form[event.target.name] = event.target.value;
   localStorage.setItem(FEDBACK_FORM, JSON.stringify(form));
 }
 
-const getForm = JSON.parse(localStorage.getItem(FEDBACK_FORM));
+function savinFormData() {
+  const getForm = JSON.parse(localStorage.getItem(FEDBACK_FORM));
 
-let email = getForm.email || '';
-let message = getForm.message || '';
-
-(function () {
-  feedbackForm['email'].value = email;
-  feedbackForm['message'].value = message;
-})();
+  if (getForm) {
+    feedbackForm['email'].value = getForm.email;
+    feedbackForm['message'].value = getForm.message;
+  }
+}
+savinFormData();
 
 function onSubmit(evt) {
   evt.preventDefault();
+
+  console.log(form);
+
   evt.target.reset();
-
-  console.log(getForm);
-
-  localStorage.clear();
+  localStorage.removeItem(FEDBACK_FORM);
 }
